@@ -1,10 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class HUD : MonoBehaviour
 {
-    public void SetLeftPaddelScore(int value) {}
-    public void SetRightPaddelScore(int value) {}
+    public GameObject scoreManager;
+    public Text leftScoreText;
+    public Text rightScoreText;
+
+    private void Update() {
+        leftScoreText.text = scoreManager.GetComponent<ScoreManager>().LeftPlayerScore.ToString();
+        rightScoreText.text = scoreManager.GetComponent<ScoreManager>().RightPlayerScore.ToString();
+    }
 }

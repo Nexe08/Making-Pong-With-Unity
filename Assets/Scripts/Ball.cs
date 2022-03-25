@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    public float movementSpeed;
+    public GameObject scoreManager;
     public Rigidbody2D rigidComponent;
-
+    public float movementSpeed;
     Vector2 velocity;
     void Start()
     {
@@ -20,6 +20,16 @@ public class Ball : MonoBehaviour
         else {
             rigidComponent.AddForce(new Vector2(movementSpeed,
                 Random.Range(-movementSpeed * .5f, movementSpeed * .5f)), ForceMode2D.Force);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        if (other.gameObject.tag.Equals("leftBallDetector")) {
+            scoreManager.GetComponent<ScoreManager>().RightPlayerScore++;
+        }
+
+        if (other.gameObject.tag.Equals("rightBallDetector")) {
+            scoreManager.GetComponent<ScoreManager>().LeftPlayerScore++;
         }
     }
 }
